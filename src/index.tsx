@@ -1,6 +1,12 @@
 import React, { useEffect, useState } from 'react';
 import ReactDOM from 'react-dom';
 import * as holiday_jp from '@holiday-jp/holiday_jp';
+import Box from '@mui/material/Box';
+import InputLabel from '@mui/material/InputLabel';
+import FormControl from '@mui/material/FormControl';
+import Select from '@mui/material/Select';
+import MenuItem from '@mui/material/MenuItem';
+import './style.css';
 
 const App: React.VFC = () => {
     type HolidayObj = {
@@ -104,13 +110,14 @@ const App: React.VFC = () => {
         const newHolidaysArr: string[] = [];
         for (let i = 1; i <= numbersOfDays[targetMonth - 1]; i++) {
             const date: Date = new Date(targetYear, targetMonth - 1, i);
-            const formatedDate = formatDate(date);
+            let formatedDate = formatDate(date);
             const isWeekend = checkIsWeekend(formatedDate);
             const isHoliday = checkIsHoliday(formatedDate);
             // 休日はnewHolidaysArr:[]に追加し、ループ終了後setState()
             if (isHoliday) {
                 allHolidays.map((holiday) => {
                     if (holiday.date === formatedDate) {
+                        formatedDate = formatedDate.slice(5);
                         newHolidaysArr.push(`${formatedDate}：${holiday.name}`);
                     }
                 });
@@ -139,42 +146,69 @@ const App: React.VFC = () => {
 
     return (
         <>
-            <select
-                value={selectedYear}
-                onChange={(e) => {
-                    setSelectedYear(e.target.value);
-                }}
-            >
-                <option value='2021'>2021</option>
-                <option value='2022'>2022</option>
-                <option value='2023'>2023</option>
-            </select>
-            年
-            <select
-                value={selectedMonth}
-                onChange={(e) => {
-                    setSelectedMonth(e.target.value);
-                }}
-            >
-                <option value='1'>1</option>
-                <option value='2'>2</option>
-                <option value='3'>3</option>
-                <option value='4'>4</option>
-                <option value='5'>5</option>
-                <option value='6'>6</option>
-                <option value='7'>7</option>
-                <option value='8'>8</option>
-                <option value='9'>9</option>
-                <option value='10'>10</option>
-                <option value='11'>11</option>
-                <option value='12'>12</option>
-            </select>
-            月<h3>Businessdays</h3>
-            <h4>{businessDays.length} days</h4>
-            <h3>Holidays</h3>
-            {holidaysOfMonth.map((holiday, key) => {
-                return <p key={key}>{holiday}</p>;
-            })}
+            <div className='wrapper'>
+                <Box sx={{ minWidth: 400 }}>
+                    <FormControl sx={{ minWidth: 200 }} size='small'>
+                        <InputLabel id='demo-select-small'>Year</InputLabel>
+                        <Select
+                            labelId='demo-select-small'
+                            id='demo-select-small'
+                            value={selectedYear}
+                            label='Year'
+                            onChange={(e) => {
+                                setSelectedYear(e.target.value);
+                            }}
+                        >
+                            <MenuItem value='2021'>2021</MenuItem>
+                            <MenuItem value='2022'>2022</MenuItem>
+                            <MenuItem value='2023'>2023</MenuItem>
+                        </Select>
+                    </FormControl>
+                    <FormControl sx={{ minWidth: 200 }} size='small'>
+                        <InputLabel id='demo-select-small'>Month</InputLabel>
+                        <Select
+                            labelId='demo-select-small'
+                            id='demo-select-small'
+                            value={selectedMonth}
+                            label='Month'
+                            onChange={(e) => {
+                                setSelectedMonth(e.target.value);
+                            }}
+                        >
+                            <MenuItem value='1'>1</MenuItem>
+                            <MenuItem value='2'>2</MenuItem>
+                            <MenuItem value='3'>3</MenuItem>
+                            <MenuItem value='4'>4</MenuItem>
+                            <MenuItem value='5'>5</MenuItem>
+                            <MenuItem value='6'>6</MenuItem>
+                            <MenuItem value='7'>7</MenuItem>
+                            <MenuItem value='8'>8</MenuItem>
+                            <MenuItem value='9'>9</MenuItem>
+                            <MenuItem value='10'>10</MenuItem>
+                            <MenuItem value='11'>11</MenuItem>
+                            <MenuItem value='12'>12</MenuItem>
+                        </Select>
+                    </FormControl>
+                </Box>
+                <div className='container h-50'>
+                    <h4 className='item'>Business days : </h4>
+                    <h4 className='item'>{businessDays.length} days</h4>
+                </div>
+                <div className='container h-50'>
+                    <h4 className='item'>Working hours : </h4>
+                    <h4 className='item'>{7.5 * businessDays.length} h</h4>
+                </div>
+                {holidaysOfMonth.map((holiday, key) => {
+                    return (
+                        <div className='container h-30' key={key}>
+                            <h4 className='item'>
+                                {key === 0 && 'Holidays : '}{' '}
+                            </h4>
+                            <h4 className='item'>{holiday}</h4>
+                        </div>
+                    );
+                })}
+            </div>
         </>
     );
 };
