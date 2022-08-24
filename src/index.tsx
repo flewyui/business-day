@@ -12,6 +12,7 @@ const App: React.VFC = () => {
     type HolidayObj = {
         date: Date;
         name: string;
+        name_en: string;
         week: string;
         week_en: string;
     };
@@ -42,7 +43,7 @@ const App: React.VFC = () => {
         const month = date.getMonth() + 1;
         const day = date.getDate();
         const dayOfWeek = date.getDay();
-        const dayOfWeekStr = ['日', '月', '火', '水', '木', '金', '土'][
+        const dayOfWeekStr = ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'][
             dayOfWeek
         ];
         const formatedDate = `${year}/${month}/${day}(${dayOfWeekStr})`;
@@ -69,7 +70,7 @@ const App: React.VFC = () => {
      */
     const checkIsWeekend = (date: string): boolean => {
         let isWeekend = false;
-        if (date.match(/土/) || date.match(/日/)) isWeekend = true;
+        if (date.match(/Sat/) || date.match(/Sun/)) isWeekend = true;
         return isWeekend;
     };
 
@@ -82,8 +83,8 @@ const App: React.VFC = () => {
             const year = holiday.date.getFullYear();
             const month = holiday.date.getMonth() + 1;
             const day = holiday.date.getDate();
-            const week = holiday.week;
-            const name = holiday.name;
+            const week = holiday.week_en.slice(0, 3);
+            const name = holiday.name_en;
             const formatedHolidayDate = `${year}/${month}/${day}(${week})`;
             const formatedHolidayObj: FormatedHolidayObj = {
                 date: formatedHolidayDate,
@@ -130,6 +131,8 @@ const App: React.VFC = () => {
     };
 
     useEffect(() => {
+        console.log(holidayObjects);
+
         for (let i = 1; i < 13; i++) {
             const lastDate = new Date(Number(selectedYear), i, 0).getDate();
             setNumbersOfDays((numbersOfDays) => [...numbersOfDays, lastDate]);
@@ -147,8 +150,8 @@ const App: React.VFC = () => {
     return (
         <>
             <div className='wrapper'>
-                <Box sx={{ minWidth: 400 }}>
-                    <FormControl sx={{ minWidth: 200 }} size='small'>
+                <Box sx={{ minWidth: 350 }}>
+                    <FormControl sx={{ minWidth: 175 }} size='small'>
                         <InputLabel id='demo-select-small'>Year</InputLabel>
                         <Select
                             labelId='demo-select-small'
@@ -164,7 +167,7 @@ const App: React.VFC = () => {
                             <MenuItem value='2023'>2023</MenuItem>
                         </Select>
                     </FormControl>
-                    <FormControl sx={{ minWidth: 200 }} size='small'>
+                    <FormControl sx={{ minWidth: 175 }} size='small'>
                         <InputLabel id='demo-select-small'>Month</InputLabel>
                         <Select
                             labelId='demo-select-small'
@@ -191,23 +194,36 @@ const App: React.VFC = () => {
                     </FormControl>
                 </Box>
                 <div className='container h-50'>
-                    <h4 className='item'>Business days : </h4>
-                    <h4 className='item'>{businessDays.length} days</h4>
+                    <h5 className='item-130'>Business days : </h5>
+                    <h5 className='item-270 text-center'>
+                        {businessDays.length} days
+                    </h5>
                 </div>
                 <div className='container h-50'>
-                    <h4 className='item'>Working hours : </h4>
-                    <h4 className='item'>{7.5 * businessDays.length} h</h4>
+                    <h5 className='item-130'>Working hours : </h5>
+                    <h5 className='item-270 text-center'>
+                        {7.5 * businessDays.length} h
+                    </h5>
                 </div>
-                {holidaysOfMonth.map((holiday, key) => {
-                    return (
-                        <div className='container h-30' key={key}>
-                            <h4 className='item'>
-                                {key === 0 && 'Holidays : '}{' '}
-                            </h4>
-                            <h4 className='item'>{holiday}</h4>
-                        </div>
-                    );
-                })}
+                {holidaysOfMonth.length ? (
+                    holidaysOfMonth.map((holiday, key) => {
+                        return (
+                            <div className='container h-30' key={key}>
+                                <h5 className='item-95'>
+                                    {key === 0 && 'Holidays : '}{' '}
+                                </h5>
+                                <h5 className='item-305 text-center'>
+                                    {holiday}
+                                </h5>
+                            </div>
+                        );
+                    })
+                ) : (
+                    <div className='container h-30'>
+                        <h5 className='item-130'>Holidays : </h5>
+                        <h5 className='item-270 text-center'>No holiday...</h5>
+                    </div>
+                )}
             </div>
         </>
     );

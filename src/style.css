@@ -1,16 +1,36 @@
 .wrapper {
-    width:400px;
+    width: 360px;
     margin: 30px auto;
 }
+
 .container {
     display: flex;
 }
-.item {
-    flex-basis: 200px;
+
+.item-95 {
+    flex-basis: 95px;
 }
+
+.item-130 {
+    flex-basis: 130px;
+}
+
+.item-270 {
+    flex-basis: 270px;
+}
+
+.item-305 {
+    flex-basis: 305px;
+}
+
 .h-50 {
     height: 50px;
 }
+
 .h-30 {
     height: 30px;
+}
+
+.text-center {
+    text-align: center;
 }
