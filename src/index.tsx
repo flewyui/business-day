@@ -6,6 +6,8 @@ import InputLabel from '@mui/material/InputLabel';
 import FormControl from '@mui/material/FormControl';
 import Select from '@mui/material/Select';
 import MenuItem from '@mui/material/MenuItem';
+import ArrowBackIosNewIcon from '@mui/icons-material/ArrowBackIosNew';
+import ArrowForwardIosIcon from '@mui/icons-material/ArrowForwardIos';
 import './style.css';
 
 const App: React.VFC = () => {
@@ -27,7 +29,6 @@ const App: React.VFC = () => {
     const holidayObjects = holiday_jp.between(startDate, endDate); // 対象期間の休日オブジェクト
     const [numbersOfDays, setNumbersOfDays] = useState<number[]>([]); // 対象年の各月の日数
     const [allHolidays, setAllHolidays] = useState<FormatedHolidayObj[]>([]); // 対象年の祝日のリスト
-    const [daysOfMonth, setDaysOfMonth] = useState<Date[]>([]); // 対象月の全日のリスト
     const [holidaysOfMonth, setHolidaysOfMonth] = useState<string[]>([]); // 対象月の祝日のリスト
     const [businessDays, setBusinessDays] = useState<string[]>([]); // 対象月の営業日のリスト
     const [selectedYear, setSelectedYear] = useState<string>(currentYear); // 選択された年
@@ -104,6 +105,7 @@ const App: React.VFC = () => {
     const getBusinessdays = (ym: string) => {
         const targetYear = Number(ym.slice(0, 4));
         let targetMonthStr = ym.slice(4, 6);
+        // 月の十の位に"0"があれば削除
         if (targetMonthStr.slice(0, 1) === '0')
             targetMonthStr = targetMonthStr.replace('0', '');
         const targetMonth = Number(targetMonthStr);
@@ -130,9 +132,37 @@ const App: React.VFC = () => {
         setBusinessDays(newBusinessdaysArr);
     };
 
-    useEffect(() => {
-        console.log(holidayObjects);
+    /**
+     * 前月を表示
+     */
+    const moveToPrevMonth = () => {
+        const prevMonth = Number(selectedMonth) - 1;
+        // 年を跨ぐ場合
+        if (prevMonth === 0) {
+            const prevYear = Number(selectedYear) - 1;
+            setSelectedMonth('12');
+            setSelectedYear(String(prevYear));
+        } else {
+            setSelectedMonth(String(prevMonth));
+        }
+    };
 
+    /**
+     * 次月を表示
+     */
+    const moveToNextMonth = () => {
+        const nextMonth = Number(selectedMonth) + 1;
+        // 年を跨ぐ場合
+        if (nextMonth === 13) {
+            const nextYear = Number(selectedYear) + 1;
+            setSelectedMonth('1');
+            setSelectedYear(String(nextYear));
+        } else {
+            setSelectedMonth(String(nextMonth));
+        }
+    };
+
+    useEffect(() => {
         for (let i = 1; i < 13; i++) {
             const lastDate = new Date(Number(selectedYear), i, 0).getDate();
             setNumbersOfDays((numbersOfDays) => [...numbersOfDays, lastDate]);
@@ -150,8 +180,13 @@ const App: React.VFC = () => {
     return (
         <>
             <div className='wrapper'>
-                <Box sx={{ minWidth: 350 }}>
-                    <FormControl sx={{ minWidth: 175 }} size='small'>
+                <Box sx={{ minWidth: 300 }}>
+                    <ArrowBackIosNewIcon
+                        color='primary'
+                        sx={{ width: 30, marginTop: 1 }}
+                        onClick={() => moveToPrevMonth()}
+                    />
+                    <FormControl sx={{ minWidth: 150 }} size='small'>
                         <InputLabel id='demo-select-small'>Year</InputLabel>
                         <Select
                             labelId='demo-select-small'
@@ -167,7 +202,7 @@ const App: React.VFC = () => {
                             <MenuItem value='2023'>2023</MenuItem>
                         </Select>
                     </FormControl>
-                    <FormControl sx={{ minWidth: 175 }} size='small'>
+                    <FormControl sx={{ minWidth: 150 }} size='small'>
                         <InputLabel id='demo-select-small'>Month</InputLabel>
                         <Select
                             labelId='demo-select-small'
@@ -192,6 +227,11 @@ const App: React.VFC = () => {
                             <MenuItem value='12'>12</MenuItem>
                         </Select>
                     </FormControl>
+                    <ArrowForwardIosIcon
+                        color='primary'
+                        sx={{ width: 30, marginTop: 1 }}
+                        onClick={() => moveToNextMonth()}
+                    />
                 </Box>
                 <div className='container h-50'>
                     <h5 className='item-130'>Business days : </h5>

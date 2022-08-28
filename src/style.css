@@ -1,3 +1,7 @@
+body {
+    background-color: #f0ffff;
+}
+
 .wrapper {
     width: 360px;
     margin: 30px auto;
