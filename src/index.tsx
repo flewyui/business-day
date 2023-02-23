@@ -2,10 +2,11 @@ import React, { useEffect, useState } from 'react';
 import ReactDOM from 'react-dom';
 import * as holiday_jp from '@holiday-jp/holiday_jp';
 import Box from '@mui/material/Box';
-import InputLabel from '@mui/material/InputLabel';
 import FormControl from '@mui/material/FormControl';
-import Select from '@mui/material/Select';
+import InputLabel from '@mui/material/InputLabel';
 import MenuItem from '@mui/material/MenuItem';
+import Select from '@mui/material/Select';
+import TextField from '@mui/material/TextField';
 import ArrowBackIosNewIcon from '@mui/icons-material/ArrowBackIosNew';
 import ArrowForwardIosIcon from '@mui/icons-material/ArrowForwardIos';
 import './style.css';
@@ -30,9 +31,10 @@ const App: React.VFC = () => {
     const [numbersOfDays, setNumbersOfDays] = useState<number[]>([]); // 対象年の各月の日数
     const [allHolidays, setAllHolidays] = useState<FormatedHolidayObj[]>([]); // 対象年の祝日のリスト
     const [holidaysOfMonth, setHolidaysOfMonth] = useState<string[]>([]); // 対象月の祝日のリスト
-    const [businessDays, setBusinessDays] = useState<string[]>([]); // 対象月の営業日のリスト
+    const [businessDaysLength, setBusinessDaysLength] = useState<string>(''); // 対象月の営業日数
     const [selectedYear, setSelectedYear] = useState<string>(currentYear); // 選択された年
     const [selectedMonth, setSelectedMonth] = useState<string>(currentMonth); // 選択された月
+    const [workingHoursPerDay, setworkingHoursPerDay] = useState<string>('7.5'); // 1日の稼働時間
 
     /**
      * 「年/月/日(曜日)」にフォーマット
@@ -129,7 +131,7 @@ const App: React.VFC = () => {
             if (!isWeekend && !isHoliday) newBusinessdaysArr.push(formatedDate);
         }
         setHolidaysOfMonth(newHolidaysArr);
-        setBusinessDays(newBusinessdaysArr);
+        setBusinessDaysLength(String(newBusinessdaysArr.length));
     };
 
     /**
@@ -180,6 +182,7 @@ const App: React.VFC = () => {
     return (
         <>
             <div className='wrapper'>
+                <h5 className='item-270 lnh-80 text-center'>Business day</h5>
                 <Box sx={{ minWidth: 300 }}>
                     <ArrowBackIosNewIcon
                         color='primary'
@@ -200,6 +203,8 @@ const App: React.VFC = () => {
                             <MenuItem value='2021'>2021</MenuItem>
                             <MenuItem value='2022'>2022</MenuItem>
                             <MenuItem value='2023'>2023</MenuItem>
+                            <MenuItem value='2024'>2024</MenuItem>
+                            <MenuItem value='2025'>2025</MenuItem>
                         </Select>
                     </FormControl>
                     <FormControl sx={{ minWidth: 150 }} size='small'>
@@ -233,16 +238,46 @@ const App: React.VFC = () => {
                         onClick={() => moveToNextMonth()}
                     />
                 </Box>
-                <div className='container h-50'>
-                    <h5 className='item-130'>Business days : </h5>
-                    <h5 className='item-270 text-center'>
-                        {businessDays.length} days
-                    </h5>
-                </div>
-                <div className='container h-50'>
+                <div className='container h-80'>
                     <h5 className='item-130'>Working hours : </h5>
                     <h5 className='item-270 text-center'>
-                        {7.5 * businessDays.length} h
+                        {Number(businessDaysLength) *
+                            Number(workingHoursPerDay)}{' '}
+                        h
+                    </h5>
+                </div>
+                <div className='container h-80'>
+                    <h5 className='item-130 lnh-80'>Settings : </h5>
+                    <h5 className='item-270 lnh-80 text-center'>
+                        <TextField
+                            sx={{ width: 100, marginTop: 3 }}
+                            id='outlined-number'
+                            label='days'
+                            type='number'
+                            size='small'
+                            value={businessDaysLength}
+                            InputLabelProps={{
+                                shrink: true,
+                            }}
+                            onChange={(e) => {
+                                setBusinessDaysLength(e.target.value);
+                            }}
+                        />{' '}
+                        ×{' '}
+                        <TextField
+                            sx={{ width: 100, marginTop: 3 }}
+                            id='outlined-number'
+                            label='hours'
+                            type='number'
+                            size='small'
+                            value={workingHoursPerDay}
+                            InputLabelProps={{
+                                shrink: true,
+                            }}
+                            onChange={(e) => {
+                                setworkingHoursPerDay(e.target.value);
+                            }}
+                        />
                     </h5>
                 </div>
                 {holidaysOfMonth.length ? (
