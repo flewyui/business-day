@@ -60,7 +60,7 @@ const App: React.VFC = () => {
      */
     const checkIsHoliday = (date: string): boolean => {
         let isHoliday = false;
-        allHolidays.map((holiday) => {
+        allHolidays.forEach((holiday) => {
             if (holiday.date === date) isHoliday = true;
         });
         return isHoliday;
@@ -120,7 +120,7 @@ const App: React.VFC = () => {
             const isHoliday = checkIsHoliday(formatedDate);
             // 休日はnewHolidaysArr:[]に追加し、ループ終了後setState()
             if (isHoliday) {
-                allHolidays.map((holiday) => {
+                allHolidays.forEach((holiday) => {
                     if (holiday.date === formatedDate) {
                         formatedDate = formatedDate.slice(5);
                         newHolidaysArr.push(`${formatedDate}：${holiday.name}`);
