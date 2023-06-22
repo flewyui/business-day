@@ -251,7 +251,7 @@ const App: React.VFC = () => {
                     <h5 className='item-270 lnh-80 text-center'>
                         <TextField
                             sx={{ width: 100, marginTop: 3 }}
-                            id='outlined-number'
+                            id='setting-days'
                             label='days'
                             type='number'
                             size='small'
@@ -266,7 +266,7 @@ const App: React.VFC = () => {
                         ×{' '}
                         <TextField
                             sx={{ width: 100, marginTop: 3 }}
-                            id='outlined-number'
+                            id='setting-hours'
                             label='hours'
                             type='number'
                             size='small'
