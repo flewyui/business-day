@@ -34,7 +34,7 @@ const App: React.VFC = () => {
     const [businessDaysLength, setBusinessDaysLength] = useState<string>(''); // 対象月の営業日数
     const [selectedYear, setSelectedYear] = useState<string>(currentYear); // 選択された年
     const [selectedMonth, setSelectedMonth] = useState<string>(currentMonth); // 選択された月
-    const [workingHoursPerDay, setworkingHoursPerDay] = useState<string>('7.5'); // 1日の稼働時間
+    const [workingHoursPerDay, setworkingHoursPerDay] = useState<string>('8'); // 1日の稼働時間
 
     /**
      * 「年/月/日(曜日)」にフォーマット
