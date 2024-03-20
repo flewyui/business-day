@@ -17,27 +17,25 @@ export const Months: React.FC<Props> = ({
         months.push(i);
     }
     return (
-        <>
-            <FormControl sx={{ minWidth: 150 }} size='small'>
-                <InputLabel id='demo-select-small'>Month</InputLabel>
-                <Select
-                    labelId='demo-select-small'
-                    id='demo-select-small'
-                    value={selectedMonth}
-                    label='Month'
-                    onChange={(e) => {
-                        setSelectedMonth(e.target.value);
-                    }}
-                >
-                    {months.map((month) => {
-                        return (
-                            <MenuItem value={month} key={month}>
-                                {month}
-                            </MenuItem>
-                        );
-                    })}
-                </Select>
-            </FormControl>
-        </>
+        <FormControl sx={{ minWidth: 150 }} size='small'>
+            <InputLabel id='demo-select-small'>Month</InputLabel>
+            <Select
+                labelId='demo-select-small'
+                id='demo-select-small'
+                value={selectedMonth}
+                label='Month'
+                onChange={(e) => {
+                    setSelectedMonth(e.target.value);
+                }}
+            >
+                {months.map((month) => {
+                    return (
+                        <MenuItem value={month} key={month}>
+                            {month}
+                        </MenuItem>
+                    );
+                })}
+            </Select>
+        </FormControl>
     );
 };

@@ -25,21 +25,19 @@ export const Years: React.FC<Props> = ({
         );
     }
     return (
-        <>
-            <FormControl sx={{ minWidth: 150 }} size='small'>
-                <InputLabel id='demo-select-small'>Year</InputLabel>
-                <Select
-                    labelId='demo-select-small'
-                    id='demo-select-small'
-                    value={selectedYear}
-                    label='Year'
-                    onChange={(e) => {
-                        setSelectedYear(e.target.value);
-                    }}
-                >
-                    {items}
-                </Select>
-            </FormControl>
-        </>
+        <FormControl sx={{ minWidth: 150 }} size='small'>
+            <InputLabel id='demo-select-small'>Year</InputLabel>
+            <Select
+                labelId='demo-select-small'
+                id='demo-select-small'
+                value={selectedYear}
+                label='Year'
+                onChange={(e) => {
+                    setSelectedYear(e.target.value);
+                }}
+            >
+                {items}
+            </Select>
+        </FormControl>
     );
 };
