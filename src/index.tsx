@@ -1,15 +1,12 @@
 import React, { useEffect, useState } from 'react';
 import ReactDOM from 'react-dom';
 import * as holiday_jp from '@holiday-jp/holiday_jp';
-import ArrowBackIosNewIcon from '@mui/icons-material/ArrowBackIosNew';
-import ArrowForwardIosIcon from '@mui/icons-material/ArrowForwardIos';
-import Box from '@mui/material/Box';
 import { Holidays } from './components/Holidays';
-import { Months } from './components/Months';
 import { Settings } from './components/Settings';
-import { Years } from './components/Years';
+import { WorkingHours } from './components/WorkingHours';
 import './style.css';
 import { HolidayObj, FormatedHolidayObj } from './types';
+import { DateSelect } from './components/DateSelect';
 
 const App: React.VFC = () => {
     const currentYear = String(new Date().getFullYear()); // 現在の年
@@ -169,48 +166,28 @@ const App: React.VFC = () => {
     }, [numbersOfDays, selectedYear, selectedMonth]);
 
     return (
-        <>
-            <div className='wrapper'>
-                <h5 className='item-270 lnh-80 text-center'>Business day</h5>
-                <Box sx={{ minWidth: 300 }}>
-                    <ArrowBackIosNewIcon
-                        color='primary'
-                        sx={{ width: 30, marginTop: 1 }}
-                        onClick={() => moveToPrevMonth()}
-                    />
-                    <Years
-                        selectedYear={selectedYear}
-                        setSelectedYear={setSelectedYear}
-                        from={2024}
-                        to={2030}
-                    />
-                    <Months
-                        selectedMonth={selectedMonth}
-                        setSelectedMonth={setSelectedMonth}
-                    />
-                    <ArrowForwardIosIcon
-                        color='primary'
-                        sx={{ width: 30, marginTop: 1 }}
-                        onClick={() => moveToNextMonth()}
-                    />
-                </Box>
-                <div className='container h-80'>
-                    <h5 className='item-130'>Working hours : </h5>
-                    <h5 className='item-270 text-center'>
-                        {Number(businessDaysLength) *
-                            Number(workingHoursPerDay)}{' '}
-                        h
-                    </h5>
-                </div>
-                <Settings
-                    businessDaysLength={businessDaysLength}
-                    workingHoursPerDay={workingHoursPerDay}
-                    setBusinessDaysLength={setBusinessDaysLength}
-                    setworkingHoursPerDay={setworkingHoursPerDay}
-                />
-                <Holidays holidaysOfMonth={holidaysOfMonth} />
-            </div>
-        </>
+        <div className='wrapper'>
+            <h5 className='item-270 lnh-80 text-center'>Business day</h5>
+            <DateSelect
+                selectedMonth={selectedMonth}
+                selectedYear={selectedYear}
+                setSelectedMonth={setSelectedMonth}
+                setSelectedYear={setSelectedYear}
+                moveToPrevMonth={moveToPrevMonth}
+                moveToNextMonth={moveToNextMonth}
+            />
+            <Settings
+                businessDaysLength={businessDaysLength}
+                workingHoursPerDay={workingHoursPerDay}
+                setBusinessDaysLength={setBusinessDaysLength}
+                setworkingHoursPerDay={setworkingHoursPerDay}
+            />
+            <WorkingHours
+                businessDaysLength={businessDaysLength}
+                workingHoursPerDay={workingHoursPerDay}
+            />
+            <Holidays holidaysOfMonth={holidaysOfMonth} />
+        </div>
     );
 };
 
