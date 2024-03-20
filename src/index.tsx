@@ -1,15 +1,15 @@
 import React, { useEffect, useState } from 'react';
 import ReactDOM from 'react-dom';
 import * as holiday_jp from '@holiday-jp/holiday_jp';
-import Box from '@mui/material/Box';
 import ArrowBackIosNewIcon from '@mui/icons-material/ArrowBackIosNew';
 import ArrowForwardIosIcon from '@mui/icons-material/ArrowForwardIos';
-import { Years } from './components/Years';
-import { Settings } from './components/Settings';
-import './style.css';
-import { Months } from './components/Months';
-import { HolidayObj, FormatedHolidayObj } from './types';
+import Box from '@mui/material/Box';
 import { Holidays } from './components/Holidays';
+import { Months } from './components/Months';
+import { Settings } from './components/Settings';
+import { Years } from './components/Years';
+import './style.css';
+import { HolidayObj, FormatedHolidayObj } from './types';
 
 const App: React.VFC = () => {
     const currentYear = String(new Date().getFullYear()); // 現在の年
