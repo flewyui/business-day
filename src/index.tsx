@@ -11,6 +11,7 @@ import ArrowForwardIosIcon from '@mui/icons-material/ArrowForwardIos';
 import { Years } from './components/Years';
 import { Settings } from './components/Settings';
 import './style.css';
+import { Months } from './components/Months';
 
 const App: React.VFC = () => {
     type HolidayObj = {
@@ -27,7 +28,7 @@ const App: React.VFC = () => {
     const currentYear = String(new Date().getFullYear()); // 現在の年
     const currentMonth = String(new Date().getMonth() + 1); // 現在の月
     const startDate = new Date('2021-01-01'); // 検索可能初日
-    const endDate = new Date('2023-12-31'); // 検索可能最終日
+    const endDate = new Date('2029-12-31'); // 検索可能最終日
     const holidayObjects = holiday_jp.between(startDate, endDate); // 対象期間の休日オブジェクト
     const [numbersOfDays, setNumbersOfDays] = useState<number[]>([]); // 対象年の各月の日数
     const [allHolidays, setAllHolidays] = useState<FormatedHolidayObj[]>([]); // 対象年の祝日のリスト
@@ -196,31 +197,10 @@ const App: React.VFC = () => {
                         from={2023}
                         to={2030}
                     />
-                    <FormControl sx={{ minWidth: 150 }} size='small'>
-                        <InputLabel id='demo-select-small'>Month</InputLabel>
-                        <Select
-                            labelId='demo-select-small'
-                            id='demo-select-small'
-                            value={selectedMonth}
-                            label='Month'
-                            onChange={(e) => {
-                                setSelectedMonth(e.target.value);
-                            }}
-                        >
-                            <MenuItem value='1'>1</MenuItem>
-                            <MenuItem value='2'>2</MenuItem>
-                            <MenuItem value='3'>3</MenuItem>
-                            <MenuItem value='4'>4</MenuItem>
-                            <MenuItem value='5'>5</MenuItem>
-                            <MenuItem value='6'>6</MenuItem>
-                            <MenuItem value='7'>7</MenuItem>
-                            <MenuItem value='8'>8</MenuItem>
-                            <MenuItem value='9'>9</MenuItem>
-                            <MenuItem value='10'>10</MenuItem>
-                            <MenuItem value='11'>11</MenuItem>
-                            <MenuItem value='12'>12</MenuItem>
-                        </Select>
-                    </FormControl>
+                    <Months
+                        selectedMonth={selectedMonth}
+                        setSelectedMonth={setSelectedMonth}
+                    />
                     <ArrowForwardIosIcon
                         color='primary'
                         sx={{ width: 30, marginTop: 1 }}
