@@ -6,12 +6,11 @@ import FormControl from '@mui/material/FormControl';
 import InputLabel from '@mui/material/InputLabel';
 import MenuItem from '@mui/material/MenuItem';
 import Select from '@mui/material/Select';
-import TextField from '@mui/material/TextField';
 import ArrowBackIosNewIcon from '@mui/icons-material/ArrowBackIosNew';
 import ArrowForwardIosIcon from '@mui/icons-material/ArrowForwardIos';
 import { Years } from './components/Years';
+import { Settings } from './components/Settings';
 import './style.css';
-import { log } from 'console';
 
 const App: React.VFC = () => {
     type HolidayObj = {
@@ -236,40 +235,12 @@ const App: React.VFC = () => {
                         h
                     </h5>
                 </div>
-                <div className='container h-80'>
-                    <h5 className='item-130 lnh-80'>Settings : </h5>
-                    <h5 className='item-270 lnh-80 text-center'>
-                        <TextField
-                            sx={{ width: 100, marginTop: 3 }}
-                            id='setting-days'
-                            label='days'
-                            type='number'
-                            size='small'
-                            value={businessDaysLength}
-                            InputLabelProps={{
-                                shrink: true,
-                            }}
-                            onChange={(e) => {
-                                setBusinessDaysLength(e.target.value);
-                            }}
-                        />{' '}
-                        ×{' '}
-                        <TextField
-                            sx={{ width: 100, marginTop: 3 }}
-                            id='setting-hours'
-                            label='hours'
-                            type='number'
-                            size='small'
-                            value={workingHoursPerDay}
-                            InputLabelProps={{
-                                shrink: true,
-                            }}
-                            onChange={(e) => {
-                                setworkingHoursPerDay(e.target.value);
-                            }}
-                        />
-                    </h5>
-                </div>
+                <Settings
+                    businessDaysLength={businessDaysLength}
+                    workingHoursPerDay={workingHoursPerDay}
+                    setBusinessDaysLength={setBusinessDaysLength}
+                    setworkingHoursPerDay={setworkingHoursPerDay}
+                />
                 {holidaysOfMonth.length ? (
                     holidaysOfMonth.map((holiday, key) => {
                         return (
