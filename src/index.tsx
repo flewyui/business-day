@@ -2,32 +2,18 @@ import React, { useEffect, useState } from 'react';
 import ReactDOM from 'react-dom';
 import * as holiday_jp from '@holiday-jp/holiday_jp';
 import Box from '@mui/material/Box';
-import FormControl from '@mui/material/FormControl';
-import InputLabel from '@mui/material/InputLabel';
-import MenuItem from '@mui/material/MenuItem';
-import Select from '@mui/material/Select';
 import ArrowBackIosNewIcon from '@mui/icons-material/ArrowBackIosNew';
 import ArrowForwardIosIcon from '@mui/icons-material/ArrowForwardIos';
 import { Years } from './components/Years';
 import { Settings } from './components/Settings';
 import './style.css';
 import { Months } from './components/Months';
+import { HolidayObj, FormatedHolidayObj } from './types';
 
 const App: React.VFC = () => {
-    type HolidayObj = {
-        date: Date;
-        name: string;
-        name_en: string;
-        week: string;
-        week_en: string;
-    };
-    type FormatedHolidayObj = {
-        date: string;
-        name: string;
-    };
     const currentYear = String(new Date().getFullYear()); // 現在の年
     const currentMonth = String(new Date().getMonth() + 1); // 現在の月
-    const startDate = new Date('2021-01-01'); // 検索可能初日
+    const startDate = new Date('2024-01-01'); // 検索可能初日
     const endDate = new Date('2029-12-31'); // 検索可能最終日
     const holidayObjects = holiday_jp.between(startDate, endDate); // 対象期間の休日オブジェクト
     const [numbersOfDays, setNumbersOfDays] = useState<number[]>([]); // 対象年の各月の日数
@@ -194,7 +180,7 @@ const App: React.VFC = () => {
                     <Years
                         selectedYear={selectedYear}
                         setSelectedYear={setSelectedYear}
-                        from={2023}
+                        from={2024}
                         to={2030}
                     />
                     <Months
