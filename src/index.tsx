@@ -9,6 +9,7 @@ import Select from '@mui/material/Select';
 import TextField from '@mui/material/TextField';
 import ArrowBackIosNewIcon from '@mui/icons-material/ArrowBackIosNew';
 import ArrowForwardIosIcon from '@mui/icons-material/ArrowForwardIos';
+import { Years } from './components/Years';
 import './style.css';
 
 const App: React.VFC = () => {
@@ -189,24 +190,12 @@ const App: React.VFC = () => {
                         sx={{ width: 30, marginTop: 1 }}
                         onClick={() => moveToPrevMonth()}
                     />
-                    <FormControl sx={{ minWidth: 150 }} size='small'>
-                        <InputLabel id='demo-select-small'>Year</InputLabel>
-                        <Select
-                            labelId='demo-select-small'
-                            id='demo-select-small'
-                            value={selectedYear}
-                            label='Year'
-                            onChange={(e) => {
-                                setSelectedYear(e.target.value);
-                            }}
-                        >
-                            <MenuItem value='2021'>2021</MenuItem>
-                            <MenuItem value='2022'>2022</MenuItem>
-                            <MenuItem value='2023'>2023</MenuItem>
-                            <MenuItem value='2024'>2024</MenuItem>
-                            <MenuItem value='2025'>2025</MenuItem>
-                        </Select>
-                    </FormControl>
+                    <Years
+                        selectedYear={selectedYear}
+                        setSelectedYear={setSelectedYear}
+                        from={2023}
+                        to={2030}
+                    />
                     <FormControl sx={{ minWidth: 150 }} size='small'>
                         <InputLabel id='demo-select-small'>Month</InputLabel>
                         <Select
