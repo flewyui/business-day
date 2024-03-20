@@ -11,6 +11,7 @@ import ArrowBackIosNewIcon from '@mui/icons-material/ArrowBackIosNew';
 import ArrowForwardIosIcon from '@mui/icons-material/ArrowForwardIos';
 import { Years } from './components/Years';
 import './style.css';
+import { log } from 'console';
 
 const App: React.VFC = () => {
     type HolidayObj = {

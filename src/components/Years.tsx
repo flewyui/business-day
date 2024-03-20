@@ -18,7 +18,11 @@ export const Years: React.FC<Props> = ({
 }) => {
     const items = [];
     for (let year = from; year < to; year++) {
-        items.push(<MenuItem value={year}>{year}</MenuItem>);
+        items.push(
+            <MenuItem value={year} key={year}>
+                {year}
+            </MenuItem>
+        );
     }
     return (
         <>
