@@ -1,20 +1,20 @@
 {
   "files": {
     "main.css": "/business-day/static/css/main.8de9107e.chunk.css",
-    "main.js": "/business-day/static/js/main.9c2e51bf.chunk.js",
-    "main.js.map": "/business-day/static/js/main.9c2e51bf.chunk.js.map",
+    "main.js": "/business-day/static/js/main.b1321714.chunk.js",
+    "main.js.map": "/business-day/static/js/main.b1321714.chunk.js.map",
     "runtime-main.js": "/business-day/static/js/runtime-main.c4d6696f.js",
     "runtime-main.js.map": "/business-day/static/js/runtime-main.c4d6696f.js.map",
-    "static/js/2.6d5297b9.chunk.js": "/business-day/static/js/2.6d5297b9.chunk.js",
-    "static/js/2.6d5297b9.chunk.js.map": "/business-day/static/js/2.6d5297b9.chunk.js.map",
+    "static/js/2.5de87f4f.chunk.js": "/business-day/static/js/2.5de87f4f.chunk.js",
+    "static/js/2.5de87f4f.chunk.js.map": "/business-day/static/js/2.5de87f4f.chunk.js.map",
     "index.html": "/business-day/index.html",
     "static/css/main.8de9107e.chunk.css.map": "/business-day/static/css/main.8de9107e.chunk.css.map",
-    "static/js/2.6d5297b9.chunk.js.LICENSE.txt": "/business-day/static/js/2.6d5297b9.chunk.js.LICENSE.txt"
+    "static/js/2.5de87f4f.chunk.js.LICENSE.txt": "/business-day/static/js/2.5de87f4f.chunk.js.LICENSE.txt"
   },
   "entrypoints": [
     "static/js/runtime-main.c4d6696f.js",
-    "static/js/2.6d5297b9.chunk.js",
+    "static/js/2.5de87f4f.chunk.js",
     "static/css/main.8de9107e.chunk.css",
-    "static/js/main.9c2e51bf.chunk.js"
+    "static/js/main.b1321714.chunk.js"
   ]
 }
