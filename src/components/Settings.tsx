@@ -1,4 +1,4 @@
-import { Stack, TextField } from '@mui/material';
+import { Stack, TextField, Typography } from '@mui/material';
 
 type Props = {
     businessDaysLength: string;
@@ -14,11 +14,16 @@ export const Settings: React.FC<Props> = ({
     setworkingHoursPerDay,
 }) => {
     return (
-        <Stack direction={'row'} justifyContent={'space-between'}>
-            <h5 className='item-140 lnh-80'>Manual Settings : </h5>
-            <h5 className='item-260 lnh-80 text-center'>
+        <Stack
+            direction={'row'}
+            alignItems={'center'}
+            justifyContent={'space-between'}
+            mt={2}
+        >
+            <Typography>Manual Settings : </Typography>
+            <Stack direction={'row'} justifyContent={'space-between'}>
                 <TextField
-                    sx={{ width: 100, marginTop: 3 }}
+                    sx={{ width: 100 }}
                     id='setting-days'
                     label='days'
                     type='number'
@@ -30,10 +35,10 @@ export const Settings: React.FC<Props> = ({
                     onChange={(e) => {
                         setBusinessDaysLength(e.target.value);
                     }}
-                />{' '}
-                ×{' '}
+                />
+                <Typography variant='body1'>×</Typography>
                 <TextField
-                    sx={{ width: 100, marginTop: 3 }}
+                    sx={{ width: 100 }}
                     id='setting-hours'
                     label='hours'
                     type='number'
@@ -46,7 +51,7 @@ export const Settings: React.FC<Props> = ({
                         setworkingHoursPerDay(e.target.value);
                     }}
                 />
-            </h5>
+            </Stack>
         </Stack>
     );
 };
