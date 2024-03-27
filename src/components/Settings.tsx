@@ -20,8 +20,8 @@ export const Settings: React.FC<Props> = ({
             justifyContent={'space-between'}
             mt={2}
         >
-            <Typography>Manual Settings : </Typography>
-            <Stack direction={'row'} justifyContent={'space-between'}>
+            <h5>Manual Settings : </h5>
+            <Stack direction={'row'} alignItems={'center'} gap={1}>
                 <TextField
                     sx={{ width: 100 }}
                     id='setting-days'
@@ -36,7 +36,7 @@ export const Settings: React.FC<Props> = ({
                         setBusinessDaysLength(e.target.value);
                     }}
                 />
-                <Typography variant='body1'>×</Typography>
+                <h5>×</h5>
                 <TextField
                     sx={{ width: 100 }}
                     id='setting-hours'
